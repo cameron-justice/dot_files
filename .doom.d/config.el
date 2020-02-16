@@ -25,6 +25,8 @@
 ;; `load-theme' function. These are the defaults.
 (setq doom-theme 'doom-one)
 
+(doom-enable-line-numbers-h)
+
 ;; If you intend to use org, it is recommended you change this!
 (setq org-directory "~/org/")
 
@@ -32,17 +34,9 @@
 ;; `nil' to disable it:
 (setq display-line-numbers-type t)
 
-(def-package! highlight-indent-guides
-  :commands highlight-indent-guides-mode
-  :hook (prog-mode . highlight-indent-guides-mode)
-  :config
-  (setq highlight-indent-guides-method 'character
-        highlight-indent-guides-character ?\⇨
-        highlight-indent-guides-delay 0.01
-        highlight-indent-guides-responsive 'top
-        highlight-indent-guides-auto-enabled nil))
-
-(setq auto-mode-alist (cons '("\\.sc" . scala-mode) auto-mode-alist))
+(require 'company)
+(setq company-idle-delay 0.2
+      company-minimum-prefix-length 3)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
@@ -59,3 +53,48 @@
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
+(package-initialize)
+
+(require 'package)
+
+;; Add melpa to your packages repositories
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+
+;; Install use-package if not already installed
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(require 'use-package)
+
+;; Enable defer and ensure by default for use-package
+(setq use-package-always-defer t
+      use-package-always-ensure t)
+
+;; Enable scala-mode and sbt-mode
+(use-package scala-mode
+  :mode "\\.s\\(cala\\|bt\\)$")
+
+(use-package sbt-mode
+  :commands sbt-start sbt-command
+  :config
+  ;; WORKAROUND: https://github.com/ensime/emacs-sbt-mode/issues/31
+  ;; allows using SPACE when in the minibuffer
+  (substitute-key-definition
+   'minibuffer-complete-word
+   'self-insert-command
+   minibuffer-local-completion-map))
+
+;; Enable nice rendering of diagnostics like compile errors.
+(use-package flycheck
+  :init (global-flycheck-mode))
+
+(use-package lsp-mode
+  ;; Optional - enable lsp-mode automatically in scala files
+  :hook (scala-mode . lsp)
+  :config (setq lsp-diagnostic-package nil))
+
+(use-package lsp-ui)
+
+;; Add company-lsp backend for metals
+(use-package company-lsp)
