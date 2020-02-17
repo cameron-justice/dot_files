@@ -2,7 +2,7 @@
 # ~/.bashrc
 #
 
-PS1="[Ken@Ruby \W]ξ "
+PS1="[Ken@\h \W]ξ "
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
