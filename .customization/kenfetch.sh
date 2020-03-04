@@ -13,4 +13,5 @@ echo -e "${BLUE}|_|\_\\\\\___||_| |_| \\__,_||_||_| \\__,_|  \\__ \\"
 echo -e "${BLUE}                                           ) )"
 echo -e "${BLUE}                                          (_/\e[0m"
 echo -e "\n"
-neofetch
+
+neofetch 

@@ -7,15 +7,15 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
-static const char normfgcolor[]      = "#c6c8d1";
-static const char normbgcolor[]      = "#161821";
-static const char normbordercolor[]  = "#6b7089";
-static const char selfgcolor[]       = "#84a0c6";
-static const char selbgcolor[]       = "#161821";
-static const char selbordercolor[]   = "#84a0c6";
-static const char titlefgcolor[]     = "#89b8c2";
-static const char titlebgcolor[]     = "#161821";
-static const char titlebordercolor[] = "#161821";
+static const char normfgcolor[]      = "#61AFEF"; /* Tag text color -- not selected */
+static const char normbgcolor[]      = "#282C34"; /* Tag background color -- not selected */
+static const char normbordercolor[]  = "#ABB2BF"; /* Tag border color -- not selected */
+static const char selfgcolor[]       = "#E06C75"; /* Tag text color -- selected */
+static const char selbgcolor[]       = "#282C34"; /* Tag background color -- selected */
+static const char selbordercolor[]   = "#E06C75"; /* Tag border color -- selected */
+static const char titlefgcolor[]     = "#E06C75"; /* Window title text color */
+static const char titlebgcolor[]     = "#425B61"; /* Window title background color */
+static const char titlebordercolor[] = "#E06C75"; /* Window title border color */
 static const char col_red[]          = "#e27878";
 static const char *colors[][3]       = {
 	/*                fg            bg                border   */
@@ -24,7 +24,7 @@ static const char *colors[][3]       = {
 };
 
 /* tagging */
-static const char *tags[] = { "WEB", "DEV", "3", "4", "5", "6", "7", "8", "MIN" };
+static const char *tags[] = { "WEB", "DEV", "IMS", "4", "5", "6", "7", "8", "MIN" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -32,8 +32,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "firefox",  NULL,       NULL,       1 ,           0,            1 },
-	{ "discord",  NULL, 	  NULL,	      1 << 2,	    0,		      1 },
+	{ "firefox",         NULL,       NULL,       1 ,           0,            1 },
+	{ "discord",         NULL, 	  NULL,	      1 << 2,	    0,		 1 },
+	{ "cmus v2.8.0",     NULL,       NULL,       1 << 8,       0,            1 },
 };
 
 /* layout(s) */
@@ -61,17 +62,23 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "xterm", NULL };
-static const char *emacscmd[] = { "emacs",   NULL };
-static const char *screengrabcmd[] = { "ssclip", NULL };
+static const char *dmenucmd[]      = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *termcmd[]       = { "xterm",     NULL };
+static const char *emacscmd[]      = { "emacs",     NULL };
+static const char *screengrabcmd[] = { "ssclip",    NULL };
+static const char *cmus_playcmd[]  = { "cmus_play", NULL };
+static const char *cmus_nextcmd[]  = { "cmus_change", "next" };
+static const char *cmus_prevcmd[]  = { "cmus_change", "prev" };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd     } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd      } },
-	{ MODKEY,                       XK_e,      spawn,          {.v = emacscmd     } },
-	{ MODKEY,                       XK_Print,  spawn,          {.v = screengrabcmd} },
+	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd      } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd       } },
+	{ MODKEY,                       XK_e,      spawn,          {.v = emacscmd      } },
+	{ MODKEY,                       XK_Print,  spawn,          {.v = screengrabcmd } },
+	{ MODKEY,                       XK_F10,    spawn,          {.v = cmus_prevcmd  } },
+	{ MODKEY,                       XK_F11,    spawn,          {.v = cmus_playcmd  } },
+	{ MODKEY,                       XK_F12,    spawn,          {.v = cmus_nextcmd  } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
