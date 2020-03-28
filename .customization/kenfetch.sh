@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 
-BLUE='\e[34m'
+BLUE='\e[36m'
 
 echo -e "${BLUE}                                       __"
 echo -e "${BLUE} _  __                    _  _         \\ \\__"

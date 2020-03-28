@@ -32,9 +32,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "firefox",         NULL,       NULL,       1 ,           0,            1 },
-	{ "discord",         NULL, 	  NULL,	      1 << 2,	    0,		 1 },
-	{ "cmus v2.8.0",     NULL,       NULL,       1 << 8,       0,            1 },
+	{ "firefox",         NULL,       NULL,       1 ,           0,            0 },
+	{ "discord",         NULL, 	     NULL,	     1 << 2,	   0,		     0 },
+	{ "cmus v2.8.0",     NULL,       NULL,       1 << 8,       0,            0 },
 };
 
 /* layout(s) */
