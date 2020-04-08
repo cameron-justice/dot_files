@@ -6,27 +6,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-
-Plug 'arcticicestudio/nord-vim'
-Plug 'itchyny/lightline.vim'
-Plug 'derekwyatt/vim-scala'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'lervag/vimtex'
-" Plug 'scalameta/coc-metals', {'do': 'yarn install --frozen-lockfile'}
-
 call plug#end()
 
 " Config for vim-scala "
 au BufRead,BufNewFile *.sbt set filetype=scala
 autocmd FileType json syntax match Comment +\/\/.\+$+
-
-colorscheme nord
-set laststatus=2
-set noshowmode
-
-let g:lightline = {
-    \   'colorscheme': 'nord',
-    \ }
 
 set et 		"expand tabs to spaces"
 

@@ -16,7 +16,15 @@ fi
 
 export TERM=xterm-256color
 
-# Global Scrips
+# Global Scripts
 export PATH=$PATH:/opt/local/bin/
 
-export PATH=$PATH:/usr/local/bin/metals-emacs
+# Custom functions
+
+arch() {
+        firefox -new-tab "https://wiki.archlinux.org/index.php?search=$1"
+}
+
+githubme() {
+        git clone https://github.com/cameron-justice/$1.git
+}
