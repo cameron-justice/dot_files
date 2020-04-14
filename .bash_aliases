@@ -6,6 +6,8 @@ alias ssclip='maim -s --format=png /dev/stdout | xclip -selection clipboard -t i
 alias gitdef='git add *; git commit -m "Cleaned up Code"; git push origin master'
 alias githerdef='git add *; git commit -m "Cleaned up Code"; git push heroku master'
 
+alias activate='source venv/bin/activate'
+
 function current_branch() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || \
   ref=$(git rev-parse --short HEAD 2> /dev/null) || return
