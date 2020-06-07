@@ -1,0 +1,10 @@
+alacritty
+steam
+vlc
+vivaldi
+xmonad
+xmobar
+discord-canary
+emacs
+jq
+pandoc
