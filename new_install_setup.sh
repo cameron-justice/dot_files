@@ -4,6 +4,8 @@ loc="~/.dots"
 mkdir Files/
 mkdir Downloads/
 
+git clone https://github.com/cameron-justice/Writings.git
+
 ln -s $loc/.Xresources ~/.Xresources
 ln -s $loc/.bash_aliases ~/.bash_aliases
 ln -s $loc/.bashrc ~/.bashrc
