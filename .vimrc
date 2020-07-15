@@ -28,3 +28,4 @@ autocmd FileType mk        setlocal noexpandtab shiftwidth=8 softtabstop=0
 autocmd FileType markdown  setlocal shiftwidth=4 tabstop=4
 autocmd FileType scala     setlocal shiftwidth=4 tabstop=4
 autocmd FileType c         setlocal shiftwidth=4 tabstop=4
+autocmd FileType hs	   setlocal expandtab shiftwidth=2 tabstop=2

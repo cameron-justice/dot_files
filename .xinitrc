@@ -10,7 +10,15 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-xrandr --output DVI-D-1 --auto --output HDMI-1 --auto --right-of DVI-D-1
+xrandr --output DVI-D-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-0 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-0 --off --output DP-1 --off
 
-slstatus &
-exec dwm
+discord-canary &
+vivaldi-stable &
+#slstatus &
+#exec dwm
+#exec xmonad
+
+# Gnome
+export XDG_SESSION_TYPE=x11
+export GDK_BACKEND=x11
+exec gnome-session
